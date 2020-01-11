@@ -7,7 +7,9 @@
     <footer>
       Already have an account?
       <br />
-      <a @click="$router.push({ name: 'signinview' })">Sign In</a>
+      <a @click="$router.push({ name: 'signinview' })" class="inline-link"
+        >Sign In</a
+      >
     </footer>
   </div>
 </template>

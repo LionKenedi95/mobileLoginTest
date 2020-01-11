@@ -3,8 +3,9 @@
     <label v-if="label" class="label-title">
       {{ label }}
     </label>
-    <i class="hint" :v-if="hint" @click="showHint = !showHint" />
+    <i :v-if="hint" class="hint" @click="showHint = !showHint" />
     <input
+      ref="input"
       :value="value"
       @input="$emit('input', $event.target.value)"
       :type="type"
@@ -50,6 +51,9 @@ export default {
     return {
       showHint: false
     };
+  },
+  mounted() {
+    if (this.autoFocus) this.$refs.input.focus();
   }
 };
 </script>

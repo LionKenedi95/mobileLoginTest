@@ -8,7 +8,7 @@
       :label="input.label"
       :error="$v.inputs[key].$error ? input.errorText : undefined"
       :hint="input.hint"
-      @input="input.value = $event"
+      :auto-focus="input.autoFocus"
     />
     <a class="button button--dark" @click="onSumbit">
       Sign in
@@ -18,7 +18,7 @@
 
 <script>
 import TextInput from "./TextInput.vue";
-import { required } from "vuelidate/lib/validators";
+import { required, minLength, sameAs } from "vuelidate/lib/validators";
 export default {
   components: { TextInput },
   data() {
@@ -27,7 +27,8 @@ export default {
         name: {
           value: "",
           label: "Full name",
-          errorText: "Enter valid full name"
+          errorText: "Enter valid full name",
+          autoFocus: true
         },
         email: {
           value: "",
@@ -52,24 +53,36 @@ export default {
   },
   validations: {
     inputs: {
-      name: {
+      $each: {
         value: {
           required
+        }
+      },
+      name: {
+        value: {
+          minLength: minLength(5)
         }
       },
       email: {
         value: {
-          required
+          regular(value) {
+            const pattern = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
+            return pattern.test(String(value).toLowerCase());
+          }
         }
       },
       password: {
         value: {
-          required
+          length: minLength(8),
+          regular(value) {
+            const v = String(value).toLowerCase();
+            return /([A-Z].*[A-Z])/.test(v);
+          }
         }
       },
       repassword: {
         value: {
-          required
+          sameAsPassword: sameAs("password")
         }
       }
     }
