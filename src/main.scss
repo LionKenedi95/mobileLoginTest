@@ -1,0 +1,28 @@
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("./fonts/Inter-Regular.woff2?v=3.11") format("woff2"),
+         url("./fonts/Inter-Regular.woff?v=3.11") format("woff");
+}
+body {
+    background: #FAF3F3;
+    color: #181C43;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+}
+h1 {
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 30px;
+}
+label {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+}
