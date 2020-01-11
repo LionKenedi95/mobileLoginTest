@@ -6,6 +6,30 @@
     src: url("./fonts/Inter-Regular.woff2?v=3.11") format("woff2"),
          url("./fonts/Inter-Regular.woff?v=3.11") format("woff");
 }
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url("./fonts/Inter-ExtraBold.woff2?v=3.11") format("woff2"),
+         url("./fonts/Inter-ExtraBold.woff?v=3.11") format("woff");
+}
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("./fonts/Inter-Medium.woff2?v=3.11") format("woff2"),
+         url("./fonts/Inter-Medium.woff?v=3.11") format("woff");
+}
+@font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("./fonts/Inter-SemiBold.woff2?v=3.11") format("woff2"),
+         url("./fonts/Inter-SemiBold.woff?v=3.11") format("woff");
+}
 body {
     background: #FAF3F3;
     color: #181C43;
@@ -16,13 +40,37 @@ body {
     line-height: 20px;
     margin: 0;
 }
+.view {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.form {
+    margin: 1rem;
+}
 h1 {
     font-weight: 800;
     font-size: 22px;
     line-height: 30px;
+    text-align: center;
 }
 label {
     font-weight: 600;
     font-size: 12px;
+}
+.button {
+    background: #FFFFFF;
+    border-radius: 50px;
+    padding: 1rem;
+    text-align: center;
+    margin: 0 0.25rem;
+    font-weight: 500;
+    font-size: 14px;
     line-height: 20px;
+    color: #000000;
+    &.button--dark {
+        background: #1E1A3E;
+        color: #FFFFFF;
+    }
 }
