@@ -8,7 +8,6 @@
       :label="input.label"
       :error="$v.inputs[key].$error ? input.errorText : undefined"
       :hint="input.hint"
-      :auto-focus="input.autoFocus"
     />
     <a class="button button--dark" @click="onSumbit">
       Sign in
@@ -24,11 +23,15 @@ export default {
   data() {
     return {
       inputs: {
+        name: {
+          value: "",
+          label: "Full name",
+          errorText: "Enter Your full name"
+        },
         email: {
           value: "",
           label: "Email",
-          errorText: "Enter valid email",
-          autoFocus: true
+          errorText: "Enter valid email"
         },
         password: {
           type: "password",
@@ -37,18 +40,33 @@ export default {
           hint:
             "Password must contain 8+ symbols, 1 special and 2 capital letters",
           errorText: "Enter valid password"
+        },
+        repassword: {
+          type: "password",
+          value: "",
+          label: "Repeat password"
         }
       }
     };
   },
   validations: {
     inputs: {
+      name: {
+        value: {
+          required
+        }
+      },
       email: {
         value: {
           required
         }
       },
       password: {
+        value: {
+          required
+        }
+      },
+      repassword: {
         value: {
           required
         }

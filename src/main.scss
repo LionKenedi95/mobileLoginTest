@@ -39,6 +39,10 @@ body {
     font-size: 14px;
     line-height: 20px;
     margin: 0;
+    box-sizing: border-box;
+}
+div {
+    box-sizing: border-box;
 }
 .view {
     text-align: center;
