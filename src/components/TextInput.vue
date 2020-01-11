@@ -6,7 +6,7 @@
     <i class="hint" :v-if="hint" @click="showHint = !showHint" />
     <input
       :value="value"
-      @input="$emit('input', $event)"
+      @input="$emit('input', $event.target.value)"
       :type="type"
       :class="{ error: error }"
     />

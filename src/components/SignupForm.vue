@@ -2,12 +2,13 @@
   <div class="signin-form">
     <text-input
       v-for="(input, key) in inputs"
+      v-model="input.value"
       :key="key"
       :type="input.type"
-      :value="input.value"
       :label="input.label"
       :error="$v.inputs[key].$error ? input.errorText : undefined"
       :hint="input.hint"
+      @input="input.value = $event"
     />
     <a class="button button--dark" @click="onSumbit">
       Sign in
@@ -26,7 +27,7 @@ export default {
         name: {
           value: "",
           label: "Full name",
-          errorText: "Enter Your full name"
+          errorText: "Enter valid full name"
         },
         email: {
           value: "",
@@ -73,9 +74,20 @@ export default {
       }
     }
   },
+  watch: {
+    inputs: {
+      handler: function() {
+        if (this.$v.$error) this.$v.$reset();
+      },
+      deep: true
+    }
+  },
   methods: {
     onSumbit() {
       this.$v.$touch();
+      if (!this.$v.$error) {
+        this.$router.push({ name: "mainview" });
+      }
     }
   }
 };

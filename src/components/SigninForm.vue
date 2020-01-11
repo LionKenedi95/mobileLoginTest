@@ -9,6 +9,7 @@
       :error="$v.inputs[key].$error ? input.errorText : undefined"
       :hint="input.hint"
       :auto-focus="input.autoFocus"
+      @input="input.value = $event"
     />
     <a class="button button--dark" @click="onSumbit">
       Sign in
@@ -58,6 +59,9 @@ export default {
   methods: {
     onSumbit() {
       this.$v.$touch();
+      if (!this.$v.$error) {
+        this.$router.push({ name: "mainview" });
+      }
     }
   }
 };
