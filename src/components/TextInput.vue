@@ -53,7 +53,7 @@ export default {
     type: {
       type: String,
       default: "text",
-      validatior: value => ["text", "number", "password"].includes(value)
+      validatior: value => ["text", "email", "password"].includes(value)
     },
     label: {
       type: String,

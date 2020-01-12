@@ -33,6 +33,7 @@ export default {
     return {
       inputs: {
         email: {
+          type: "email",
           value: "",
           label: "Email",
           autoFocus: true

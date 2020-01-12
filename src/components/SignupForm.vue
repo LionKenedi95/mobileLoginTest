@@ -32,6 +32,7 @@ export default {
           autoFocus: true
         },
         email: {
+          type: "email",
           value: "",
           label: "Email",
           errorText: "Enter valid email"
