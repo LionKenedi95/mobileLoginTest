@@ -96,5 +96,15 @@ label {
     }
 }
 .inline-link {
-    border-bottom: 1px solid;
+  border-bottom: 1px solid;
+}
+.tolltip {
+  background: #1E1A3E;
+  border-radius: 8px;
+  letter-spacing: -0.4px;
+  color: #F3F3F3;
+  padding: 0.5rem;
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
 }

@@ -1,9 +1,19 @@
 <template>
   <div class="text-input">
-    <label v-if="label" class="label-title">
+    <label v-if="label">
       {{ label }}
     </label>
-    <i :v-if="hint" class="hint" @click="showHint = !showHint" />
+    <div class="text-input--hint--container">
+      <img
+        v-if="hint"
+        src="../assets/question.svg"
+        @click="showHint = !showHint"
+      />
+      <div v-if="showHint" class="tolltip">
+        {{ hint }}
+      </div>
+    </div>
+
     <div class="text-input--container">
       <input
         ref="input"
@@ -92,7 +102,7 @@ export default {
   padding: 20px 0;
   position: relative;
   label {
-    padding-left: 20px;
+    padding-left: 1rem;
     position: absolute;
     left: 0;
     top: 0;
@@ -126,10 +136,25 @@ export default {
       width: 1.2rem;
     }
   }
-  .hint {
+  .text-input--hint--container {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 0.25rem;
+    right: 1rem;
+    > .tolltip {
+      position: absolute;
+      bottom: 1.5rem;
+      right: -1rem;
+      width: 60vw;
+      &::after {
+        content: "";
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid #1e1a3e;
+        position: absolute;
+        bottom: -5px;
+        right: calc(1rem + -2px);
+      }
+    }
   }
   .error-text {
     padding-left: 20px;

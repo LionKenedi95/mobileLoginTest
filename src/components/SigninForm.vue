@@ -40,9 +40,7 @@ export default {
         password: {
           type: "password",
           value: "",
-          label: "Password",
-          hint:
-            "Password must contain 8+ symbols, 1 special and 2 capital letters"
+          label: "Password"
         }
       },
       wrongPassword: false
