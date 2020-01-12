@@ -6,7 +6,7 @@
       :type="input.type"
       :value="input.value"
       :label="input.label"
-      :error="$v.inputs[key].$error ? input.errorText : undefined"
+      :error="$v.inputs[key].$error"
       :hint="input.hint"
       :auto-focus="input.autoFocus"
       @input="input.value = $event"
@@ -14,6 +14,13 @@
     <a class="button button--dark" @click="onSumbit">
       Sign in
     </a>
+    <transition name="slide">
+      <div v-if="wrongPassword" class="alert-container">
+        <a class="alert" @click="wrongPassword = false"
+          >Wrong email or password</a
+        >
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -28,7 +35,6 @@ export default {
         email: {
           value: "",
           label: "Email",
-          errorText: "Enter valid email",
           autoFocus: true
         },
         password: {
@@ -36,10 +42,10 @@ export default {
           value: "",
           label: "Password",
           hint:
-            "Password must contain 8+ symbols, 1 special and 2 capital letters",
-          errorText: "Enter valid password"
+            "Password must contain 8+ symbols, 1 special and 2 capital letters"
         }
-      }
+      },
+      wrongPassword: false
     };
   },
   validations: {
@@ -73,8 +79,11 @@ export default {
   methods: {
     onSumbit() {
       this.$v.$touch();
+      // There should be an authorization attempt through the backend, but is didn't TR
       if (!this.$v.$error) {
         this.$router.push({ name: "mainview" });
+      } else {
+        this.wrongPassword = true;
       }
     }
   }
@@ -90,5 +99,14 @@ export default {
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-enter,
+.slide-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
 }
 </style>

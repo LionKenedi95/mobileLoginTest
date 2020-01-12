@@ -6,7 +6,8 @@
       :key="key"
       :type="input.type"
       :label="input.label"
-      :error="$v.inputs[key].$error ? input.errorText : undefined"
+      :error="$v.inputs[key].$error"
+      :error-text="input.errorText"
       :hint="input.hint"
       :auto-focus="input.autoFocus"
     />

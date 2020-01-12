@@ -4,15 +4,30 @@
       {{ label }}
     </label>
     <i :v-if="hint" class="hint" @click="showHint = !showHint" />
-    <input
-      ref="input"
-      :value="value"
-      @input="$emit('input', $event.target.value)"
-      :type="type"
-      :class="{ error: error }"
-    />
-    <span v-if="error" class="error-text">
-      {{ error }}
+    <div class="text-input--container">
+      <input
+        ref="input"
+        :value="value"
+        @input="$emit('input', $event.target.value)"
+        :type="currentType"
+        :class="{ error: error }"
+        :autocomplete="type === 'password'"
+      />
+      <img
+        v-if="type === 'password' && currentType === 'password'"
+        src="../assets/eye.svg"
+        class="text-input--password-eye"
+        @click="toogleShowPass"
+      />
+      <img
+        v-if="type === 'password' && currentType === 'text'"
+        src="../assets/close-eye.svg"
+        class="text-input--password-eye"
+        @click="toogleShowPass"
+      />
+    </div>
+    <span v-if="error && errorText" class="error-text">
+      {{ errorText }}
     </span>
   </div>
 </template>
@@ -39,6 +54,10 @@ export default {
       default: ""
     },
     error: {
+      type: Boolean,
+      default: false
+    },
+    errorText: {
       type: String,
       default: ""
     },
@@ -49,11 +68,19 @@ export default {
   },
   data() {
     return {
-      showHint: false
+      showHint: false,
+      showPassword: false,
+      currentType: this.type
     };
   },
   mounted() {
     if (this.autoFocus) this.$refs.input.focus();
+  },
+  methods: {
+    toogleShowPass() {
+      this.currentType = this.currentType === "password" ? "text" : "password";
+      this.showPassword = !this.showPassword;
+    }
   }
 };
 </script>
@@ -70,24 +97,33 @@ export default {
     left: 0;
     top: 0;
   }
-  input {
-    border: 0;
-    background: #f3f3fa;
-    border-radius: 50px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 20px;
-    color: rgba(0, 0, 0, 0.8);
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    box-sizing: border-box;
-    width: 100%;
-    &:focus {
-      outline: none;
+  .text-input--container {
+    position: relative;
+    > input {
+      border: 0;
+      background: #f3f3fa;
+      border-radius: 50px;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+      color: rgba(0, 0, 0, 0.8);
+      padding: 0.5rem 2rem 0.5rem 1rem;
+      box-sizing: border-box;
+      width: 100%;
+      &:focus {
+        outline: none;
+      }
+      &.error {
+        background: #ffe0e6;
+      }
     }
-    &.error {
-      background: #ffe0e6;
+    .text-input--password-eye {
+      position: absolute;
+      right: 0.5rem;
+      top: 0.5rem;
+      width: 1.2rem;
     }
   }
   .hint {
