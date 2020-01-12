@@ -1,24 +1,12 @@
-# test-mobile-login
-
-## Project setup
+# Тестовый проект на позицию Middle Frontend Developer
+## Запуск проекта
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
+или можно открыть [готовый ресурс](http://lionkenedi.online) с Вашего телефона
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Комментарии к проекту:
+- Для входа можно использовать любую валидную комбинацию логина (email) и пароля, так как в ТЗ не входила реализация полной регистрации\авторизации, поэтому момент запроса авторизации пропущен. 
+- Верстка рассчитана только на вертикальное отображение на мобильном устройстве согласно предоставленному макету
+- Стиль кода соответствует стандартным настройкам ES-Lint и Prettier из Vue CLI.
