@@ -18,7 +18,7 @@
 
 <script>
 import TextInput from "./TextInput.vue";
-import { required, minLength, sameAs } from "vuelidate/lib/validators";
+import { required, minLength } from "vuelidate/lib/validators";
 export default {
   components: { TextInput },
   data() {
@@ -46,43 +46,50 @@ export default {
         repassword: {
           type: "password",
           value: "",
-          label: "Repeat password"
+          label: "Repeat password",
+          errorText: "Repeat password"
         }
       }
     };
   },
   validations: {
     inputs: {
-      $each: {
-        value: {
-          required
-        }
-      },
       name: {
         value: {
+          required,
           minLength: minLength(5)
         }
       },
       email: {
         value: {
+          required,
           regular(value) {
-            const pattern = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
+            const pattern = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/;
             return pattern.test(String(value).toLowerCase());
           }
         }
       },
       password: {
         value: {
+          required,
           length: minLength(8),
           regular(value) {
-            const v = String(value).toLowerCase();
-            return /([A-Z].*[A-Z])/.test(v);
+            const v = String(value);
+            /*eslint-disable no-useless-escape*/
+            return (
+              /([A-Z].*[A-Z])/.test(v) &&
+              /[!"#$%&'()*+,\-.\/:;<=>?@[\\\]\^_`{\|}~]/.test(v)
+            );
+            /*eslint-enable no-useless-escape*/
           }
         }
       },
       repassword: {
         value: {
-          sameAsPassword: sameAs("password")
+          required,
+          sameAsPassword(value) {
+            return value === this.inputs.password.value;
+          }
         }
       }
     }

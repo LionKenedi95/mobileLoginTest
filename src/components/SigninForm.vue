@@ -19,7 +19,7 @@
 
 <script>
 import TextInput from "./TextInput.vue";
-import { required } from "vuelidate/lib/validators";
+import { required, minLength } from "vuelidate/lib/validators";
 export default {
   components: { TextInput },
   data() {
@@ -48,14 +48,24 @@ export default {
         value: {
           required,
           regular(value) {
-            const pattern = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
+            const pattern = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,})$/;
             return pattern.test(String(value).toLowerCase());
           }
         }
       },
       password: {
         value: {
-          required
+          required,
+          length: minLength(8),
+          regular(value) {
+            const v = String(value);
+            /*eslint-disable no-useless-escape*/
+            return (
+              /([A-Z].*[A-Z])/.test(v) &&
+              /[!"#$%&'()*+,\-.\/:;<=>?@[\\\]\^_`{\|}~]/.test(v)
+            );
+            /*eslint-enable no-useless-escape*/
+          }
         }
       }
     }
